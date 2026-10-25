@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="sale_qty_split.QtySplitWidget">
+        <a t-if="this.isOver" href="#" class="o_qty_split_icon oi text-warning cursor-pointer"
+           data-icon="warning" role="img" aria-label="Over the per-order limit"
+           title="Over the per-order limit" t-on-click.prevent.stop="this.showPopup"/>
+    </t>
+
+    <t t-name="sale_qty_split.QtySplitPopover">
+        <div class="o_qty_split_popover p-3" style="min-width: 260px;">
+            <h6 class="mb-2">
+                <i class="oi text-warning me-1" data-icon="warning"/>Over the per-order limit
+            </h6>
+            <table class="table table-sm table-borderless mb-2">
+                <tbody>
+                    <tr><td class="text-muted">Product</td><td class="text-end" t-out="this.productName"/></tr>
+                    <tr><td class="text-muted">Ordered</td><td class="text-end" t-out="this.data.product_uom_qty"/></tr>
+                    <tr><td class="text-muted">Max per order</td><td class="text-end" t-out="this.data.qty_split_limit"/></tr>
+                    <tr class="fw-bold text-danger"><td>Excess</td><td class="text-end" t-out="this.data.qty_over_limit"/></tr>
+                </tbody>
+            </table>
+            <p class="text-muted small mb-2">
+                Confirmation is blocked. Keep <t t-out="this.data.qty_split_limit"/> on this order and
+                move the excess to a new order.
+            </p>
+            <button class="btn btn-primary btn-sm w-100" t-on-click="this.onSplit">
+                Split onto new order
+            </button>
+        </div>
+    </t>
+
+</templates>
